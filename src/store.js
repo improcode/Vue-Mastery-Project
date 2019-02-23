@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import EventService from '@/services/EventService'
 
 Vue.use(Vuex)
 
@@ -16,23 +17,20 @@ export default new Vuex.Store({
       'community'
     ],
     // the same event like in db.json server to train search by id in getter !!!
-    events: [
-      {
-        id: 1,
-        title: 'Beach Cleanup'
-      },
-      {
-        id: 2,
-        title: 'Park Cleanup'
-      },
-      {
-        id: 3,
-        title: 'Pet Adoption Day'
-      }
-    ]
+    events: []
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    ADD_EVENT(state, event) {
+      state.events.push(event)
+    }
+  },
+  actions: {
+    createEvent({ commit }, event) {
+      return EventService.postEvent(event).then(() => {
+        commit('ADD_EVENT', event)
+      })    
+    }
+  },
   getters: {
     getEventById: state => id => {
       return state.events.find(event => event.id === id)

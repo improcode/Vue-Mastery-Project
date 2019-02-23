@@ -15,7 +15,7 @@ export default {
   components: { EventCard },
   data() {
     return {
-      serwer: 'http://localhost:3000/events',
+      // serwer: 'http://localhost:3000/events',
       events: []
     }
   },
