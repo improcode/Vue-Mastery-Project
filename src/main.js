@@ -5,7 +5,7 @@ import router from './router'
 import Vue from 'vue'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
-import store from './store'
+import store from './store/store'
 
 const requireComponent = require.context(
   './components',

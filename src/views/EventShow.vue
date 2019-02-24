@@ -25,8 +25,9 @@
 </template>
 
 <script>
+// jeśli otwieramy aplikację z url konkretnego eventu to pojawia się błąd. prawdopodobnie widok zaczyna się ładować przed przyjściem danych. jak to naprawić?
 import EventService from '@/services/EventService.js'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   props: ['id'],
   name: 'EventShow',
@@ -35,10 +36,13 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('fetchEvent', this.id)
+    this.fetchEvent(this.id)
   },
   computed: {
-    ...mapState(['event'])
+    ...mapState({event: state => state.event.event})
+  },
+  methods: {
+    ...mapActions('event', ['fetchEvent'])
   }
 }
 </script>
